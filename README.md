@@ -1,2 +1,2 @@
-# RabbitMQ-Learning with Email Services By ( MailGun )
+# RabbitMQ-Learning
 I am created this Repo for Learning purpose

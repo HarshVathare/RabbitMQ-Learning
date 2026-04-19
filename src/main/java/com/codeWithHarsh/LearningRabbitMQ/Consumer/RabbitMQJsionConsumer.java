@@ -1,7 +1,8 @@
 package com.codeWithHarsh.LearningRabbitMQ.Consumer;
 
 import com.codeWithHarsh.LearningRabbitMQ.DTO.User;
-import com.codeWithHarsh.LearningRabbitMQ.EmailService.MailgunEmailService;
+
+import com.codeWithHarsh.LearningRabbitMQ.EmailService.SmtpEmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class RabbitMQJsionConsumer {
 
-    private final MailgunEmailService emailService;
+    private final SmtpEmailService emailService;
 
-    public RabbitMQJsionConsumer(MailgunEmailService emailService) {
+    public RabbitMQJsionConsumer(SmtpEmailService emailService) {
         this.emailService = emailService;
     }
 
@@ -23,8 +24,37 @@ public class RabbitMQJsionConsumer {
         // 🔥 Send Email
         emailService.sendEmail(
                 user.getEmail(),
-                "Welcome to Our System 🚀",
-                "Hello " + user.getFirstName() + " "+user.getLastName()+", your registration is successful!"
+                "✅ Appointment Status | MediCore",
+                user.getFirstName(),
+                user.getLastName()
         );
+
+
+
+
+//        emailService.sendEmail(
+//                user.getEmail(),
+//                "✅ Appointment Status | MediCore",
+//                "Dear " + user.getFirstName() + " " + user.getLastName() + ",\n\n" +
+//                        "We are pleased to inform you that your appointment has been successfully CONFIRMED.\n\n" +
+//
+//                        "🩺 Appointment Details:\n" +
+//                        "-----------------------------------\n" +
+//                        "Status       : CONFIRMED\n" +
+//                        "Patient Name : " + user.getFirstName() + " " + user.getLastName() + "\n" +
+//                        "-----------------------------------\n\n" +
+//
+//                        "📌 Please arrive at least 10 minutes before your scheduled time.\n" +
+//                        "📄 Carry necessary medical documents if applicable.\n\n" +
+//
+//                        "If you have any questions or need to reschedule, feel free to contact us.\n\n" +
+//
+//                        "Thank you for choosing MediCore.\n" +
+//                        "We wish you good health! 💙\n\n" +
+//
+//                        "Best Regards,\n" +
+//                        "MediCore Team\n" +
+//                        "📧 support@medicore.com"
+//        );
     }
 }
